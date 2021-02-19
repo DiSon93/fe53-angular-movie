@@ -9,7 +9,7 @@ import { SigninResult } from 'src/app/core/model/auth.model'
 })
 export class MainLayoutComponent implements OnInit, OnDestroy {
   curentUser: SigninResult | null = null;
-  currentUserSubscription?: Subscription;
+  currentUserSubscription?:Subscription;
 
   constructor(private auth : AuthService) { }
 

@@ -6,14 +6,13 @@ import { SignupComponent } from 'src/app/auth/signup/signup.component'
 @Injectable({
   providedIn: 'root'
 })
-export class SignUpGuard implements CanDeactivate<SignupComponent> {
-
+export class SignupGuard implements CanDeactivate<SignupComponent> {
   canDeactivate(
-    component: unknown,
+    component: SignupComponent,
     currentRoute: ActivatedRouteSnapshot,
     currentState: RouterStateSnapshot,
     nextState?: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-      const isDirty = component.signupForm.dirty || component.signupForm.submitted;
+      const isDirty = component.signupForm.dirty && component.signupForm.submitted;
       if(isDirty) {
         return confirm('Bạn có chăc muốn rời khỏi không')
       }

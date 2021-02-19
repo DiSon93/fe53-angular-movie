@@ -4,8 +4,8 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClientModule,HTTP_INTERCEPTORS  } from '@angular/common/http',
-import {AuthInterceptor } from 'srx/app/core/interceptors'
+import { HttpClientModule,HTTP_INTERCEPTORS  } from '@angular/common/http';
+import {AuthInterceptor } from 'src/app/core/interceptors/auth.interceptor'
 
 @NgModule({
   declarations: [

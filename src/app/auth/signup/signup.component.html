@@ -1,0 +1,78 @@
+<h3>Signup Form</h3>
+
+<!-- ngForm cung cấp các phương thức làm việc với form  -->
+<!-- signupForm.value => {taiKhoan: 123}  -->
+<!-- taiKhoan, email, soDT, matKhau, hoTen  -->
+
+<pre>{{ signupForm.value | json}}</pre>
+<form #signupForm="ngForm" class="form-container" (ngSubmit)="handleSignup()">
+    <!-- tài khoản  -->
+    <mat-form-field appearance="fill">
+        <mat-label>Tài khoản</mat-label>
+        <input matInput ngModel name="taiKhoan" #taiKhoan="ngModel" required  minlength="3" maxlength="20">
+        <mat-error *ngIf="taiKhoan.invalid">
+          <span *ngIf="taiKhoan.errors?.required">
+              Tài khoản không được để trống
+          </span>
+          <span *ngIf="taiKhoan.errors?.minlength || taiKhoan.errors?.maxlength">
+              Tài khoản phải từ 3 đến 20 kí tự
+          </span>
+        </mat-error>
+        <!-- <pre>{{taiKhoan.errors | json}}</pre> -->
+        <!-- <div *ngIf="taiKhoan.invalid && (taiKhoan.dirty || taiKhoan.touched)">
+            Tài khoản không được bỏ trống
+        </div> -->
+    </mat-form-field>
+    <!-- mật khẩu  -->
+    <mat-form-field appearance="fill">
+        <mat-label>Mật Khẩu</mat-label>
+        <input type="password" matInput ngModel name="matKhau" #matKhau="ngModel" required>
+        <mat-error *ngIf="matKhau.invalid">
+            <span *ngIf="matKhau.errors?.required"> 
+                Mật khẩu không được để trống
+            </span>
+
+        </mat-error>
+    </mat-form-field>
+
+    <!-- Email  -->
+    <mat-form-field appearance="fill">
+        <mat-label>Email</mat-label>
+        <input matInput ngModel name="email" type="email" #email="ngModel" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"/>
+        <mat-error *ngIf="email.invalid">
+            <span *ngIf="email.errors?.required">
+                Email không được để trống
+            </span>
+            <span *ngIf="email.errors?.pattern">
+                Email không đúng định dạng
+            </span>
+
+        </mat-error>
+    </mat-form-field>
+
+    <!-- họ Tên  -->
+    <mat-form-field appearance="fill">
+        <mat-label>Họ tên</mat-label>
+        <input matInput ngModel name="hoTen" #hoTen="ngModel" required>
+        <mat-error *ngIf="hoTen.invalid">
+            <span *ngIf="hoTen.errors?.required">
+                Họ tên không được để trống
+            </span>
+
+        </mat-error>
+    </mat-form-field>
+
+    <!-- Số điện thoại  -->
+    <mat-form-field appearance="fill">
+        <mat-label>Số điện thoại</mat-label>
+        <input matInput ngModel name="soDT" #soDT="ngModel" required>
+        <mat-error *ngIf="soDT.invalid">
+            <span *ngIf="soDT.errors?.required">
+              Số điện thoại không được để trống
+            </span>
+
+        </mat-error>
+    </mat-form-field>
+
+    <button [disabled]="signupForm.invalid">Submit</button>
+</form>

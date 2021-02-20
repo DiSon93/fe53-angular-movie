@@ -1,4 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { AuthService} from 'src/app/core/services/auth.service';
 import { SigninResult } from 'src/app/core/model/auth.model'
 
@@ -8,21 +9,24 @@ import { SigninResult } from 'src/app/core/model/auth.model'
   styleUrls: ['./main-layout.component.scss']
 })
 export class MainLayoutComponent implements OnInit, OnDestroy {
-  curentUser: SigninResult | null = null;
-  currentUserSubscription?:Subscription;
+  currentUser: SigninResult | null = null;
+  currentUserSubscription?: Subscription;
 
-  constructor(private auth : AuthService) { }
+  constructor(private auth: AuthService) {}
 
   ngOnInit(): void {
-    //Chuyển curentUser thành 1 Observable để có thể theo dõi sự thay đổi của biên nào
-     this.currentUserSubscription = this.auth.currentUser.asObservable().subscribe({
-      next: (result)  => {
-        this.curentUser = result;
-      }
-    })
+    // Chuyển currentUser thành 1 Observable để có thể theo dõi sự thay đổi của biến này
+    this.currentUserSubscription = this.auth.currentUser
+      .asObservable()
+      .subscribe({
+        next: (result) => {
+          this.currentUser = result;
+        },
+      });
   }
-  //Lifecucle 
+  // Lifecycle: Chạy trước khi component bị huỷ
   ngOnDestroy(): void {
-  this.currentUserSubscription?.unsubscrible();
+    // unsubcrible currentUser
+    this.currentUserSubscription?.unsubscribe
   }
 }

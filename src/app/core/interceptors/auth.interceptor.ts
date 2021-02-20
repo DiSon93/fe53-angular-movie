@@ -13,18 +13,22 @@ export class AuthInterceptor implements HttpInterceptor {
 
   constructor(private auth: AuthService) {}
 
-  intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
-    //Thay đổi request 
+  intercept(
+    request: HttpRequest<unknown>,
+    next: HttpHandler
+  ): Observable<HttpEvent<unknown>> {
+    // Thay đổi request
     const { accessToken } = this.auth.currentUser.value || {};
-    if(accessToken) {
-      request.clone({
+
+    if (accessToken) {
+      request = request.clone({
         headers: request.headers.append(
           'Authorization',
           `Bearer ${accessToken}`
-        )
-      })
-
+        ),
+      });
     }
+
     return next.handle(request);
   }
 }

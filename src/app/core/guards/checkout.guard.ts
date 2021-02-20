@@ -18,6 +18,7 @@ export class CheckoutGuard implements CanActivate {
       }
       //Khi không đủ điều kiện truy cạp vào route, 
       (window as any).PATH = state.url;
+      // console.log(state.url)
       this.router.navigateByUrl('/signin')
     return false;
   }
